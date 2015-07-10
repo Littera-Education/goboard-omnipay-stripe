@@ -67,13 +67,7 @@ class CreateCustomerRequest extends AbstractRequest
     {
         $data = array();
         $data['description'] = $this->getDescription();
-
-        if ($this->getToken()) {
-            $data['card'] = $this->getToken();
-        } elseif ($this->getCard()) {
-            $data['card'] = $this->getCardData();
-            $data['email'] = $this->getCard()->getEmail();
-        }
+        $data['source'] = $this->getSource();
 
         return $data;
     }
@@ -81,5 +75,16 @@ class CreateCustomerRequest extends AbstractRequest
     public function getEndpoint()
     {
         return $this->endpoint . '/customers';
+    }
+
+
+    public function getSource()
+    {
+        return $this->getParameter('source');
+    }
+
+    public function setSource($value)
+    {
+        return $this->setParameter('source', $value);
     }
 }
