@@ -68,6 +68,7 @@ class CreateCustomerRequest extends AbstractRequest
         $data = array();
         $data['description'] = $this->getDescription();
         $data['source'] = $this->getSource();
+        $data['email'] = $this->getEmail();
 
         return $data;
     }
@@ -86,5 +87,15 @@ class CreateCustomerRequest extends AbstractRequest
     public function setSource($value)
     {
         return $this->setParameter('source', $value);
+    }
+
+    public function getEmail()
+    {
+        return $this->getParameter('email');
+    }
+
+    public function setEmail($value)
+    {
+        return $this->setParameter('email', $value);
     }
 }
