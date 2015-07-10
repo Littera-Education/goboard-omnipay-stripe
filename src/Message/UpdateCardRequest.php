@@ -25,7 +25,6 @@ class UpdateCardRequest extends AbstractRequest
     public function getData()
     {
         $data = array();
-        $data['id'] = $this->getId();
         $data['exp_month'] = $this->getExpMonth();
         $data['exp_year'] = $this->getExpYear();
 
