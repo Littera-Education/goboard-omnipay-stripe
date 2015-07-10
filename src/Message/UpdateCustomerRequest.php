@@ -38,23 +38,47 @@ class UpdateCustomerRequest extends AbstractRequest
 {
     public function getData()
     {
-        $this->validate('customerReference');
         $data = array();
         $data['description'] = $this->getDescription();
-
-        if ($this->getToken()) {
-            $data['card'] = $this->getToken();
-        } elseif ($this->getCard()) {
-            $this->getCard()->validate();
-            $data['card'] = $this->getCardData();
-            $data['email'] = $this->getCard()->getEmail();
-        }
+        $data['source'] = $this->getSource();
+        $data['email'] = $this->getEmail();
 
         return $data;
     }
 
     public function getEndpoint()
     {
-        return $this->endpoint . '/customers/' . $this->getCustomerReference();
+        return $this->endpoint . '/customers/' . $this->getId();
+    }
+
+
+    public function getSource()
+    {
+        return $this->getParameter('source');
+    }
+
+    public function setSource($value)
+    {
+        return $this->setParameter('source', $value);
+    }
+
+    public function getEmail()
+    {
+        return $this->getParameter('email');
+    }
+
+    public function setEmail($value)
+    {
+        return $this->setParameter('email', $value);
+    }
+
+    public function getId()
+    {
+        return $this->getParameter('id');
+    }
+
+    public function setId($value)
+    {
+        return $this->setParameter('id', $value);
     }
 }
