@@ -64,39 +64,35 @@ class CreateCardRequest extends AbstractRequest
     public function getData()
     {
         $data = array();
-
-        // Only set the description if we are creating a new customer.
-        if (! $this->getCustomerReference()) {
-            $data['description'] = $this->getDescription();
-        }
-
-        if ($this->getSource()) {
-            $data['source'] = $this->getSource();
-        } elseif ($this->getToken()) {
-            $data['source'] = $this->getToken();
-        } elseif ($this->getCard()) {
-            $this->getCard()->validate();
-            $data['source'] = $this->getCardData();
-            // Only set the email address if we are creating a new customer.
-            if (! $this->getCustomerReference()) {
-                $data['email'] = $this->getCard()->getEmail();
-            }
-        } else {
-            // one of token or card is required
-            $this->validate('source');
-        }
+        $data['source'] = $this->getSource();
 
         return $data;
     }
 
     public function getEndpoint()
     {
-        if ($this->getCustomerReference()) {
-            // Create a new card on an existing customer
-            return $this->endpoint . '/customers/' .
-                $this->getCustomerReference() . '/cards';
-        }
-        // Create a new customer and card
-        return $this->endpoint . '/customers';
+        return $this->endpoint . '/customers/' . $this->getId() . '/sources';
+    }
+
+
+    public function getSource()
+    {
+        return $this->getParameter('source');
+    }
+
+    public function setSource($value)
+    {
+        return $this->setParameter('source', $value);
+    }
+
+
+    public function getId()
+    {
+        return $this->getParameter('id');
+    }
+
+    public function setId($value)
+    {
+        return $this->setParameter('id', $value);
     }
 }
