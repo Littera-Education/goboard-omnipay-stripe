@@ -71,6 +71,21 @@ class PurchaseRequest extends AuthorizeRequest
         $data = parent::getData();
         $data['capture'] = 'true';
 
+        if($this->getStatementDescriptor()) {
+            $data['statement_descriptor'] = $this->getStatementDescriptor();
+        }
+
         return $data;
+    }
+
+
+    public function getStatementDescriptor()
+    {
+        return $this->getParameter('statementDescriptor');
+    }
+
+    public function setStatementDescriptor($value)
+    {
+        return $this->setParameter('statementDescriptor', $value);
     }
 }
