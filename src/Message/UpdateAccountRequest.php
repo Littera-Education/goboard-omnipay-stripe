@@ -41,12 +41,12 @@ class UpdateAccountRequest extends AbstractRequest
 
     public function getExternalAccount()
     {
-        return $this->getParameter('external_account');
+        return $this->getParameter('externalAaccount');
     }
 
     public function setExternalAccount($value)
     {
-        return $this->setParameter('external_account', $value);
+        return $this->setParameter('externalAaccount', $value);
     }
 
     public function getStatementDescriptor()

@@ -52,12 +52,12 @@ class CreateAccountRequest extends AbstractRequest
 
     public function getExternalAccount()
     {
-        return $this->getParameter('external_account');
+        return $this->getParameter('externalAccount');
     }
 
     public function setExternalAccount($value)
     {
-        return $this->setParameter('external_account', $value);
+        return $this->setParameter('externalAccount', $value);
     }
 
     public function getStatementDescriptor()
