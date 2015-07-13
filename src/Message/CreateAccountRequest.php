@@ -72,11 +72,11 @@ class CreateAccountRequest extends AbstractRequest
 
     public function getTransferSchedule()
     {
-        return $this->getParameter('transfer_schedule');
+        return $this->getParameter('transferSchedule');
     }
 
     public function setTransferSchedule($value)
     {
-        return $this->setParameter('transfer_schedule', $value);
+        return $this->setParameter('transferSchedule', $value);
     }
 }
