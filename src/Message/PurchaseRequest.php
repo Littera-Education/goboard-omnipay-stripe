@@ -68,8 +68,23 @@ class PurchaseRequest extends AuthorizeRequest
 {
     public function getData()
     {
-        $data = parent::getData();
+        $data = array();
         $data['capture'] = 'true';
+        $data['amount'] = $this->getAmount();
+        $data['currency'] = $this->getCurrency();
+        
+        if($this->getCustomer()) {
+            $data['customer'] = $this->getCustomer();
+        }
+        if($this->getSource()) {
+            $data['source'] = $this->getSource();
+        }
+        if($this->getDestination()) {
+            $data['destination'] = $this->getDestination();
+        }
+        if($this->getApplicationFee()) {
+            $data['application_fee'] = $this->getApplicationFee();
+        }
 
         if($this->getStatementDescriptor()) {
             $data['statement_descriptor'] = $this->getStatementDescriptor();
@@ -87,5 +102,57 @@ class PurchaseRequest extends AuthorizeRequest
     public function setStatementDescriptor($value)
     {
         return $this->setParameter('statementDescriptor', $value);
+    }
+
+
+    public function getCurrency()
+    {
+        return $this->getParameter('currency');
+    }
+
+    public function setCurrency($value)
+    {
+        return $this->setParameter('currency', $value);
+    }
+
+    public function getCustomer()
+    {
+        return $this->getParameter('customer');
+    }
+
+    public function setCustomer($value)
+    {
+        return $this->setParameter('customer', $value);
+    }
+
+    public function getSource()
+    {
+        return $this->getParameter('source');
+    }
+
+    public function setSource($value)
+    {
+        return $this->setParameter('source', $value);
+    }
+
+
+    public function getDestination()
+    {
+        return $this->getParameter('destination');
+    }
+
+    public function setDestination($value)
+    {
+        return $this->setParameter('destination', $value);
+    }
+
+    public function getApplicationFee()
+    {
+        return $this->getParameter('applicationFee');
+    }
+
+    public function setApplicationFee($value)
+    {
+        return $this->setParameter('applicationFee', $value);
     }
 }
