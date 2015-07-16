@@ -50,42 +50,17 @@ namespace Omnipay\Stripe\Message;
  */
 class RefundRequest extends AbstractRequest
 {
-    /**
-     * @return bool Whether the application fee should be refunded
-     */
-    public function getRefundApplicationFee()
-    {
-        return $this->getParameter('refundApplicationFee');
-    }
-
-    /**
-     * Whether to refund the application fee associated with a charge.
-     *
-     * From the {@link https://stripe.com/docs/api#create_refund Stripe docs}:
-     * Boolean indicating whether the application fee should be refunded
-     * when refunding this charge. If a full charge refund is given, the
-     * full application fee will be refunded. Else, the application fee
-     * will be refunded with an amount proportional to the amount of the
-     * charge refunded. An application fee can only be refunded by the
-     * application that created the charge.
-     *
-     * @param bool $value Whether the application fee should be refunded
-     * @return AbstractRequest
-     */
-    public function setRefundApplicationFee($value)
-    {
-        return $this->setParameter('refundApplicationFee', $value);
-    }
 
     public function getData()
     {
-        $this->validate('transactionReference', 'amount');
-
         $data = array();
         $data['amount'] = $this->getAmountInteger();
 
         if ($this->getRefundApplicationFee()) {
             $data['refund_application_fee'] = "true";
+        }
+        if ($this->getReverseTransfer()) {
+            $data['reverse_transfer'] = "true";
         }
 
         return $data;
@@ -93,6 +68,36 @@ class RefundRequest extends AbstractRequest
 
     public function getEndpoint()
     {
-        return $this->endpoint.'/charges/'.$this->getTransactionReference().'/refund';
+        return $this->endpoint.'/charges/'.$this->getChargeId().'/refunds';
+    }
+
+    public function getChargeId()
+    {
+        return $this->getParameter('chargeId');
+    }
+
+    public function setChargeId($value)
+    {
+        return $this->setParameter('chargeId', $value);
+    }
+
+    public function getRefundApplicationFee()
+    {
+        return $this->getParameter('refundApplicationFee');
+    }
+
+    public function setRefundApplicationFee($value)
+    {
+        return $this->setParameter('refundApplicationFee', $value);
+    }
+
+    public function getReverseTransfer()
+    {
+        return $this->getParameter('reverseTransfer');
+    }
+
+    public function setReverseTransfer($value)
+    {
+        return $this->setParameter('reverseTransfer', $value);
     }
 }
