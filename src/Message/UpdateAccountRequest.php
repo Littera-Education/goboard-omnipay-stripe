@@ -24,7 +24,18 @@ class UpdateAccountRequest extends AbstractRequest
 
     public function getEndpoint()
     {
-        return $this->endpoint . '/accounts';
+        return $this->endpoint . '/accounts/' . $this->getAccountId();
+    }
+
+
+    public function getAccountId()
+    {
+        return $this->getParameter('accountId');
+    }
+
+    public function setAccountId($value)
+    {
+        return $this->setParameter('accountId', $value);
     }
 
 
