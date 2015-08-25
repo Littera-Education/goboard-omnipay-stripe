@@ -11,6 +11,7 @@ class UpdateAccountRequest extends AbstractRequest
         $data = array();
         $data['email'] = $this->getEmail();
         $data['external_account'] = $this->getExternalAccount();
+        $data['legal_entity'] = $this->getLegalEntity();
 
         if($this->getStatementDescriptor()) {
             $data['statement_descriptor'] = $this->getStatementDescriptor();
@@ -58,6 +59,16 @@ class UpdateAccountRequest extends AbstractRequest
     public function setExternalAccount($value)
     {
         return $this->setParameter('externalAccount', $value);
+    }
+
+    public function getLegalEntity()
+    {
+        return $this->getParameter('legalEntity');
+    }
+
+    public function setLegalEntity($value)
+    {
+        return $this->setParameter('legalEntity', $value);
     }
 
     public function getStatementDescriptor()
