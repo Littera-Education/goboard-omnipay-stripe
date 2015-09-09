@@ -20,6 +20,10 @@ class UpdateAccountRequest extends AbstractRequest
             $data['transfer_schedule'] = $this->getTransferSchedule();
         }
 
+        if($this->getTosAcceptance()) {
+            $data['tos_acceptance'] = $this->getTosAcceptance();
+        }
+
         return $data;
     }
 
@@ -89,5 +93,15 @@ class UpdateAccountRequest extends AbstractRequest
     public function setTransferSchedule($value)
     {
         return $this->setParameter('transferSchedule', $value);
+    }
+
+    public function getTosAcceptance()
+    {
+        return $this->getParameter('tosAcceptance');
+    }
+
+    public function setTosAcceptance($value)
+    {
+        return $this->setParameter('tosAcceptance', $value);
     }
 }
