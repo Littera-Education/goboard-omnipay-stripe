@@ -28,6 +28,10 @@ class TransferRequest extends AbstractRequest
             $data['description'] = $this->getDescription();
         }
 
+        if($this->getRecipient()) {
+            $data['recipient'] = $this->getRecipient();
+        }
+
         return $data;
     }
 
@@ -36,6 +40,15 @@ class TransferRequest extends AbstractRequest
         return $this->endpoint.'/transfers';
     }
 
+    public function getRecipient()
+    {
+        return $this->getParameter('recipient');
+    }
+
+    public function setRecipient($value)
+    {
+        return $this->setParameter('recipient', $value);
+    }
 
     public function getSourceTransaction()
     {
