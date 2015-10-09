@@ -109,6 +109,16 @@ abstract class AbstractRequest extends \Omnipay\Common\Message\AbstractRequest
         return $this->setParameter('metadata', $value);
     }
 
+    public function getImpersonate()
+    {
+        return $this->getParameter('impersonate');
+    }
+
+    public function setImpersonate($value)
+    {
+        return $this->setParameter('impersonate', $value);
+    }
+
     abstract public function getEndpoint();
 
     /**
@@ -141,9 +151,17 @@ abstract class AbstractRequest extends \Omnipay\Common\Message\AbstractRequest
             null,
             $data
         );
-        $httpResponse = $httpRequest
-            ->setHeader('Authorization', 'Basic '.base64_encode($this->getApiKey().':'))
-            ->send();
+
+        $httpRequest = $httpRequest
+            ->setHeader('Authorization', 'Basic '.base64_encode($this->getApiKey().':'));
+
+
+        if($this->getImpersonate()) {
+            $httpRequest = $httpRequest
+                ->setHeader('Stripe-Account', $this->getImpersonate());
+        }
+
+        $httpResponse = $httpRequest->send();
 
         return $this->response = new Response($this, $httpResponse->json());
     }
