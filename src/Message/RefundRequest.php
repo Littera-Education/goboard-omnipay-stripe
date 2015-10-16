@@ -54,7 +54,8 @@ class RefundRequest extends AbstractRequest
     public function getData()
     {
         $data = array();
-        $data['amount'] = $this->getAmountInteger();
+        $data['amount'] = $this->getAmount();
+        $data['charge'] = $this->getChargeId();
 
         if ($this->getRefundApplicationFee()) {
             $data['refund_application_fee'] = "true";
@@ -68,7 +69,7 @@ class RefundRequest extends AbstractRequest
 
     public function getEndpoint()
     {
-        return $this->endpoint.'/charges/'.$this->getChargeId().'/refunds';
+        return $this->endpoint.'/refunds';
     }
 
     public function getChargeId()
