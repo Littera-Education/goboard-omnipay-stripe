@@ -16,7 +16,7 @@ class FetchChargeRequest extends AbstractRequest
 
     public function getEndpoint()
     {
-        return $this->endpoint . '/charges/' . $this->getId();
+        return $this->endpoint . '/charges/' . $this->getCharge();
     }
 
     public function getHttpMethod()
