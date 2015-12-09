@@ -54,7 +54,10 @@ class RefundRequest extends AbstractRequest
     public function getData()
     {
         $data = array();
-        $data['amount'] = $this->getAmount();
+        $amnt = $this->getParameter('amount');
+        if($amnt && $this->getAmount() > 0) {
+            $data['amount'] = $this->getAmount();
+        }
         $data['charge'] = $this->getChargeId();
 
         if ($this->getRefundApplicationFee()) {
