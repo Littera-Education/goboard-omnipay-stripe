@@ -11,19 +11,22 @@ class UpdateAccountRequest extends AbstractRequest
         $data = array();
         $data['email'] = $this->getEmail();
         $data['external_account'] = $this->getExternalAccount();
-        $data['legal_entity'] = $this->getLegalEntity();
+        //$data['legal_entity'] = $this->getLegalEntity(); // removed due to new Stripe API
 
         if($this->getStatementDescriptor()) {
             $data['statement_descriptor'] = $this->getStatementDescriptor();
         }
         if($this->getTransferSchedule()) {
-            $data['transfer_schedule'] = $this->getTransferSchedule();
+            $data['settings'] = ['payouts' => ['schedule' => $this->getTransferSchedule()]];
         }
 
         if($this->getTosAcceptance()) {
             $data['tos_acceptance'] = $this->getTosAcceptance();
         }
 
+        if($this->getIndividual()) {
+            $data['individual'] = $this->getIndividual();
+        }
         return $data;
     }
 
@@ -63,6 +66,16 @@ class UpdateAccountRequest extends AbstractRequest
     public function setExternalAccount($value)
     {
         return $this->setParameter('externalAccount', $value);
+    }
+
+    public function getIndividual()
+    {
+        return $this->getParameter('individual');
+    }
+
+    public function setIndividual($value)
+    {
+        return $this->setParameter('individual', $value);
     }
 
     public function getLegalEntity()
