@@ -27,6 +27,10 @@ class UpdateAccountRequest extends AbstractRequest
         if($this->getIndividual()) {
             $data['individual'] = $this->getIndividual();
         }
+
+        if($this->getBusinessType()) {
+            $data['business_type'] = $this->getBusinessType();
+        }
         return $data;
     }
 
@@ -78,6 +82,16 @@ class UpdateAccountRequest extends AbstractRequest
         return $this->setParameter('individual', $value);
     }
 
+    public function getBusinessType()
+    {
+        return $this->getParameter('business_type');
+    }
+
+    public function setBusinessType($value)
+    {
+        return $this->setParameter('business_type', $value);
+    }    
+    
     public function getLegalEntity()
     {
         return $this->getParameter('legalEntity');
