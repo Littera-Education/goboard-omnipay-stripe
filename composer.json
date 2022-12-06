@@ -1,5 +1,5 @@
 {
-    "name": "studysocial/omnipay-stripe",
+    "name": "Littera-Education/goboard-omnipay-stripe",
     "type": "library",
     "description": "Fork of omnipay/stripe: Stripe driver for the Omnipay payment processing library",
     "keywords": [
