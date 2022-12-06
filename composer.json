@@ -10,7 +10,7 @@
         "payment",
         "stripe"
     ],
-    "homepage": "https://github.com/studysocial/omnipay-stripe",
+    "homepage": "https://github.com/Littera-Education/goboard-omnipay-stripe",
     "license": "MIT",
     "authors": [
         {
